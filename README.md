@@ -1,4 +1,3 @@
-# Assignment_BTech2026_-2201921520072-
 Problem Statement: Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
 
 Return any possible rearrangement of s or return "" if not possible.
@@ -22,6 +21,8 @@ Approach:
 3. Greedily construct the string by placing the most frequent character in the result and ensuring that adjacent characters are not the same.
 
 Code:
+
+```
 class Solution {
 public:
     string reorganizeString(string s) {
@@ -64,6 +65,7 @@ public:
     
     }
 };
+```
 
 Explanation:
 1. Frequency Map:
