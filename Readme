@@ -1,0 +1,67 @@
+Problem Statement:
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+3. Every close bracket has a corresponding open bracket of the same type.
+
+Platform: Leetocde
+
+
+Explanation:
+1. Stack (stk): We use a stack to keep track of the opening brackets. The idea is that the last opened bracket will be the first one to be closed (LIFO).
+2. unordered_map (bracketPairs): This map stores pairs of matching brackets. We use it to quickly check if the closing bracket matches the top of the stack.
+3. Opening brackets ('(', '{', '['): When we encounter one of these, we push it onto the stack.
+4. Closing brackets (')', '}', ']'): When we encounter one of these, we check if the stack is empty or if the top of the stack does not match the corresponding opening bracket. If either condition is true, the string is invalid. If the top matches, we pop the stack.
+5. End Condition: After processing all characters, if the stack is empty, the string is valid (all brackets have been matched). If the stack is not empty, there are unmatched opening brackets, so the string is invalid.
+6. main Function: We test the isValid() function with the string "{[()]}". If the string is valid, the message "The string is valid." is printed. Otherwise, "The string is not valid." is printed.
+
+
+```
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> stk;  
+    unordered_map<char, char> bracketPairs = {
+        {')', '('},
+        {']', '['},
+        {'}', '{'}
+    };
+
+    
+    for (char c : s) {
+        
+        if (c == '(' || c == '[' || c == '{') {
+            stk.push(c);
+        } 
+        
+        else if (c == ')' || c == ']' || c == '}') {
+            
+            if (stk.empty() || stk.top() != bracketPairs[c]) {
+                return false;
+            }
+            
+            stk.pop();
+        }
+    }
+
+    
+    return stk.empty();
+}
+
+int main() {
+    string s = "{[()]}";
+
+    
+    if (isValid(s)) {
+        cout << "The string is valid." << endl;
+    } else {
+        cout << "The string is not valid." << endl;
+    }
+
+    return 0;
+    }
+};
+```
