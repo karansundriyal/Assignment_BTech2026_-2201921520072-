@@ -1,0 +1,60 @@
+Problem Statement: Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+Platform: Leetcode
+
+```
+class Solution {
+public:
+    bool validPalindrome(string s) {
+        int left = 0, right = s.size() - 1;
+        
+        while (left < right) {
+            if (s[left] != s[right]) {
+                return canBePalindromeAfterDeletion(s, left, right);
+            }
+            left++;
+            right--;
+        }
+        
+        return true;
+    }
+
+private:
+    
+    bool canBePalindromeAfterDeletion(const string& s, int left, int right) {
+      
+        return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+    }
+
+    
+    bool isPalindrome(const string& s, int left, int right) {
+        while (left < right) {
+            if (s[left] != s[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
+```
+Explanation:
+1. Class Solution
+The Solution class has a method called validPalindrome, which checks if a string can become a palindrome after deleting at most one character.
+If a mismatch is found during the comparison of characters from both ends (s[left] != s[right]), the method canBePalindromeAfterDeletion is called to check if skipping one character (either left or right) will make the string a palindrome.
+The helper method isPalindrome is used to check if a substring (from left to right) is a palindrome.
+
+2. Method validPalindrome:
+This method compares characters from both ends (left and right). If characters at these positions are the same, it moves inward (left++ and right--).
+If a mismatch is found, it checks whether removing one character (either the character at left or right) will result in a palindrome.
+
+3. Method canBePalindromeAfterDeletion:
+This method checks if we can remove either the character at left or right to form a palindrome. It does this by calling the isPalindrome method twice: once after skipping the character at left, and once after skipping the character at right.
+
+4. Helper Method isPalindrome:
+This method checks if a substring (from left to right indices) is a palindrome by iterating through the substring and comparing characters at each end.
+
+5. Main Function:
+The main function creates an object of class Solution and calls the validPalindrome method to check if the string can become a palindrome after deleting at most one character.
+The result is printed based on the return value of the validPalindrome method.
